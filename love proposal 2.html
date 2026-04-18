@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Robuuu 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  overflow:hidden;
+  font-family:'Poppins', sans-serif;
+  color:white;
+}
+
+/* intro */
+.intro{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  animation:fadeOut 4s forwards;
+}
+
+@keyframes fadeOut{
+  100%{opacity:0; visibility:hidden;}
+}
+
+/* background hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 8s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* floating text */
+.loveText{
+  position:absolute;
+  color:#ffb3c6;
+  opacity:0.4;
+  animation:float 10s linear infinite;
+}
+
+/* container */
+.container{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:none;
+}
+
+/* envelope */
+.envelope{
+  width:220px;
+  height:140px;
+  background:#ffccd5;
+  position:relative;
+  cursor:pointer;
+  border-radius:10px;
+}
+
+.flap{
+  position:absolute;
+  border-left:110px solid transparent;
+  border-right:110px solid transparent;
+  border-bottom:70px solid #ff4d6d;
+  top:-70px;
+  transform-origin:top;
+  transition:1s;
+}
+
+/* letter */
+.letter{
+  position:absolute;
+  width:300px;
+  background:white;
+  color:black;
+  padding:20px;
+  border-radius:12px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  transition:1s;
+  font-size:18px;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+.container.open .flap{
+  transform:rotateX(180deg);
+}
+
+.container.open .letter{
+  transform:translate(-50%,-140%) scale(1);
+}
+
+/* title */
+.title{
+  font-family:'Great Vibes', cursive;
+  font-size:30px;
+  color:#ff4d6d;
+}
+
+/* buttons */
+button{
+  padding:10px 18px;
+  margin-top:10px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.yes{background:#ff4d6d; color:white;}
+.no{background:gray; color:white; position:absolute;}
+
+</style>
+</head>
+
+<body>
+
+<div class="intro">💖 Just a little surprise for you... 💖</div>
+
+<div class="container" id="box">
+
+  <div class="envelope">
+    <div class="flap"></div>
+  </div>
+
+  <div class="letter">
+    <div class="title">My Baby 💗</div>
+    <div id="text"></div>
+
+    <button class="yes" onclick="yesClick()">YES 💖</button>
+    <button class="no" id="noBtn">NO 😏</button>
+  </div>
+
+</div>
+
+<audio id="music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+
+<script>
+
+// background hearts
+for(let i=0;i<25;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(h);
+}
+
+// floating text
+for(let i=0;i<25;i++){
+  let t=document.createElement("div");
+  t.className="loveText";
+  t.innerText="I Love You Robuuu";
+  t.style.left=Math.random()*100+"vw";
+  t.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(t);
+}
+
+// show envelope after intro
+setTimeout(()=>{
+  document.getElementById("box").style.display="block";
+},4000);
+
+// open envelope
+let box=document.getElementById("box");
+box.addEventListener("click",()=>{
+  box.classList.add("open");
+  playMusic();
+  startTyping();
+});
+
+// typing text
+let msg=`My robuu,
+
+তুমি আমার লাইফে এর বেস্ট একটা পার্ট 💖
+তুমি আমাকে এত সুন্দর করে যত্ন করো, ভালোবাসো, আগলিয়ে রাখো, শাসন করো…
+আমি চাই তুমি সারাজীবন এইভাবে থাকো আমার সাথে 🥹
+
+তোমাকে ছাড়া আমার কিছুই ভালো লাগে না…
+তোমাকে ভালোবাসি অনেক 💞
+
+💍 Will u be my husband?
+And My lover forever ♾️`;
+
+let i=0;
+function startTyping(){
+  function type(){
+    if(i<msg.length){
+      document.getElementById("text").innerHTML+=msg[i];
+      i++;
+      setTimeout(type,35);
+    }
+  }
+  type();
+}
+
+// YES
+function yesClick(){
+  document.body.innerHTML="<h1 style='color:pink;text-align:center;margin-top:40vh;'>💖 FOREVER WITH YOU 💍</h1>";
+}
+
+// NO run
+let noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+  noBtn.style.top=Math.random()*80+"%";
+  noBtn.style.left=Math.random()*80+"%";
+});
+
+// music
+function playMusic(){
+  document.getElementById("music").play();
+}
+
+</script>
+
+</body>
+</html>
